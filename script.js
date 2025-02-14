@@ -1,6 +1,7 @@
-document.getElementById('noButton').addEventListener('click', function() {
+let noButtonClicks = 0;
+document.getElementById('noButton').addEventListener('click', function () {
     const yesButton = document.getElementById('yesButton');
-    const messageDisplay = document.getElementById('messageDisplay'); // Asegúrate de tener un elemento para mostrar los mensajes
+    const messageDisplay = document.getElementById('messageDisplay');
     const currentFontSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
     const messages = [
         "¿Estás segura?",
@@ -21,22 +22,19 @@ document.getElementById('noButton').addEventListener('click', function() {
         "Please?",
         "Porfi"
     ];
-    if (!this.counter) {
-        this.counter = 0;
-    }
+    noButtonClicks++;
     yesButton.style.fontSize = (currentFontSize + 5) + 'px';
-    if (this.counter < messages.length) {
-        messageDisplay.textContent = messages[this.counter];
-        this.counter++;
+    if (noButtonClicks < messages.length) {
+        messageDisplay.textContent = messages[noButtonClicks - 1];
     } else {
         messageDisplay.textContent = "Porfi";
     }
 });
-document.getElementById('yesButton').addEventListener('click', function() {
+document.getElementById('yesButton').addEventListener('click', function () {
     const gif = document.getElementById('gif');
     const message = document.getElementById('message');
     const buttons = document.querySelector('.buttons');
     gif.src = 'si.gif';
-    message.textContent = 'Muchas gracias mi amor, te amo';
+    message.textContent = `Sabía que dirías que sí en tan solo ${noButtonClicks} intento(s), te amo`;
     buttons.style.display = 'none';
 });
